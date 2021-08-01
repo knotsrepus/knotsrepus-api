@@ -1,0 +1,392 @@
+openapi: "3.0.1"
+info:
+  title: "KNOTSREPUS API"
+  description: "API to retrieve archived /r/superstonk submissions."
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+  version: "2021-08-01T18:19:54Z"
+servers:
+- url: "https://api.knotsrepus.net"
+paths:
+  /submission/{submission_id}/media:
+    get:
+      summary: "Get the list of archived media attached to the submission with the\
+        \ specified ID."
+      parameters:
+      - name: "submission_id"
+        in: "path"
+        description: "The ID of the submission to return the list of media for."
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "The list of filenames for the media attached to the submission."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:knotsrepus-api/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+    options:
+      parameters:
+      - name: "submission_id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+  /submission/{submission_id}:
+    get:
+      summary: "Get the archived submission with the specified ID."
+      parameters:
+      - name: "submission_id"
+        in: "path"
+        description: "The ID of the submission to return."
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "The archived submission."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:knotsrepus-api/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+    options:
+      parameters:
+      - name: "submission_id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+  /submission:
+    get:
+      summary: "Gets a list of IDs for all archived submissions."
+      responses:
+        "200":
+          description: "The list of IDs for all archived submissions."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:knotsrepus-api/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+    options:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+  /submission/{submission_id}/comments:
+    get:
+      summary: "Get the archived comments on the submission with the specified ID."
+      parameters:
+      - name: "submission_id"
+        in: "path"
+        description: "The ID of the submission to return comments for."
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "The archived comments on the submission."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:knotsrepus-api/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+    options:
+      parameters:
+      - name: "submission_id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+  /submission/{submission_id}/media/{filename}:
+    get:
+      summary: "Get the archived media object with the specified filename attached\
+        \ to the submission with the specified ID."
+      parameters:
+      - name: "filename"
+        in: "path"
+        description: "The filename of the media object."
+        required: true
+        schema:
+          type: "string"
+      - name: "submission_id"
+        in: "path"
+        description: "The ID of the submission the media object is attached to."
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "The media object."
+          content:
+            video/*:
+              schema:
+                $ref: "#/components/schemas/Empty"
+            image/*:
+              schema:
+                $ref: "#/components/schemas/Empty"
+            audio/*:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:knotsrepus-api/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+    options:
+      parameters:
+      - name: "filename"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      - name: "submission_id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+components:
+  schemas:
+    Empty:
+      title: "Empty Schema"
+      type: "object"
+x-amazon-apigateway-documentation:
+  version: "0.1.0"
+  createdDate: "2021-08-01T21:46:41Z"
+  documentationParts:
+  - location:
+      type: "API"
+    properties:
+      info:
+        description: "API to retrieve archived /r/superstonk submissions."
+        license:
+          name: "Apache 2.0"
+          url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+  - location:
+      type: "METHOD"
+      path: "/submission/{submission_id}/comments"
+      method: "GET"
+    properties:
+      summary: "Get the archived comments on the submission with the specified ID."
+  - location:
+      type: "METHOD"
+      path: "/submission/{submission_id}/media/{filename}"
+      method: "GET"
+    properties:
+      summary: "Get the archived media object with the specified filename attached\
+        \ to the submission with the specified ID."
+  - location:
+      type: "METHOD"
+      path: "/submission/{submission_id}/media"
+      method: "GET"
+    properties:
+      summary: "Get the list of archived media attached to the submission with the\
+        \ specified ID."
+  - location:
+      type: "METHOD"
+      path: "/submission/{submission_id}"
+      method: "GET"
+    properties:
+      summary: "Get the archived submission with the specified ID."
+  - location:
+      type: "METHOD"
+      path: "/submission"
+      method: "GET"
+    properties:
+      summary: "Gets a list of IDs for all archived submissions."
+  - location:
+      type: "PATH_PARAMETER"
+      path: "/submission/{submission_id}/media/{filename}"
+      method: "GET"
+      name: "filename"
+    properties:
+      description: "The filename of the media object."
+  - location:
+      type: "PATH_PARAMETER"
+      path: "/submission/{submission_id}/comments"
+      method: "GET"
+      name: "submission_id"
+    properties:
+      description: "The ID of the submission to return comments for."
+  - location:
+      type: "PATH_PARAMETER"
+      path: "/submission/{submission_id}/media/{filename}"
+      method: "GET"
+      name: "submission_id"
+    properties:
+      description: "The ID of the submission the media object is attached to."
+  - location:
+      type: "PATH_PARAMETER"
+      path: "/submission/{submission_id}/media"
+      method: "GET"
+      name: "submission_id"
+    properties:
+      description: "The ID of the submission to return the list of media for."
+  - location:
+      type: "PATH_PARAMETER"
+      path: "/submission/{submission_id}"
+      method: "GET"
+      name: "submission_id"
+    properties:
+      description: "The ID of the submission to return."
+  - location:
+      type: "RESPONSE"
+      path: "/submission/{submission_id}/comments"
+      method: "GET"
+      statusCode: "200"
+    properties:
+      description: "The archived comments on the submission."
+  - location:
+      type: "RESPONSE"
+      path: "/submission/{submission_id}/media/{filename}"
+      method: "GET"
+      statusCode: "200"
+    properties:
+      description: "The media object."
+  - location:
+      type: "RESPONSE"
+      path: "/submission/{submission_id}/media"
+      method: "GET"
+      statusCode: "200"
+    properties:
+      description: "The list of filenames for the media attached to the submission."
+  - location:
+      type: "RESPONSE"
+      path: "/submission/{submission_id}"
+      method: "GET"
+      statusCode: "200"
+    properties:
+      description: "The archived submission."
+  - location:
+      type: "RESPONSE"
+      path: "/submission"
+      method: "GET"
+      statusCode: "200"
+    properties:
+      description: "The list of IDs for all archived submissions."
+x-amazon-apigateway-binary-media-types:
+- "*/*"

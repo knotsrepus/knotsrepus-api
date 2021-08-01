@@ -1,0 +1,7 @@
+{
+  "resource": "/submission/{submission_id}/media/{filename}",
+  "pathParameters": {
+    "submission_id": "ml197j",
+    "filename": "714v1izjogr61.png"
+  }
+}
